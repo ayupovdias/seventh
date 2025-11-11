@@ -8,6 +8,7 @@ import lombok.Builder;
 public class GameDto {
     private Long id;
     private String title;
+    private String description;
     private int price;
     private String release;
     private String developer;

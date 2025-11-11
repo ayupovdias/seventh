@@ -50,6 +50,9 @@ public class GameServiceImpl implements GameService{
         if(gameDto.getTitle()!=null){
             dto.setTitle(gameDto.getTitle());
         }
+        if(gameDto.getDescription()!=null){
+            dto.setDescription(gameDto.getDescription());
+        }
         if(gameDto.getPrice()!=0){
             dto.setPrice(gameDto.getPrice());
         }
@@ -83,6 +86,7 @@ public class GameServiceImpl implements GameService{
                 builder().
                 id(game.getId()).
                 title(game.getTitle()).
+                description(game.getDescription()).
                 developer(game.getDeveloper()).
                 publisher(game.getPublisher()).
                 price(game.getPrice()).
@@ -98,14 +102,16 @@ public class GameServiceImpl implements GameService{
         else if(gameDto.getAgeRating()>99){
             gameDto.setAgeRating(99);
         }
-        Game game =new Game();
-        game.setId(gameDto.getId());
-        game.setTitle(gameDto.getTitle());
-        game.setDeveloper(gameDto.getDeveloper());
-        game.setRelease(gameDto.getRelease());
-        game.setPublisher(gameDto.getPublisher());
-        game.setPrice(gameDto.getPrice());
-        game.setAgeRating(gameDto.getAgeRating());
+        Game game=Game.builder()
+                .id(gameDto.getId())
+                .title(gameDto.getTitle())
+                .description(gameDto.getDescription())
+                .price(gameDto.getPrice())
+                .release(gameDto.getRelease())
+                .developer(gameDto.getDeveloper())
+                .publisher(gameDto.getPublisher())
+                .ageRating(gameDto.getAgeRating())
+                .build();
         return game;
     }
 }

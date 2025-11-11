@@ -21,17 +21,16 @@ public class GameController {
     @GetMapping
     public ResponseEntity<?> getGames(){
         List<GameDto> gamesDto=gameService.getGames();
-        if(gamesDto.isEmpty()){
+        if(gamesDto.size()==0){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return ResponseEntity.ok(gamesDto);
+        return new ResponseEntity<>(gamesDto, HttpStatus.OK);
+
     }
     @GetMapping(value="/{id}")
     public ResponseEntity<?> getGame(@PathVariable("id") Long id){
         GameDto gameDto=gameService.getGame(id);
-        if(Objects.isNull(gameDto)){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
         return ResponseEntity.ok(gameDto);
     }
     @PostMapping
@@ -43,7 +42,7 @@ public class GameController {
     public ResponseEntity<?> updateGame(@PathVariable("id") Long id, @RequestBody GameDto gameDto){
         GameDto dto=gameService.updateGame(gameDto, id);
         if(Objects.isNull(dto)){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(dto);
 
